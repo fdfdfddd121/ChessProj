@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+
+#define BOARD_SIZE 8
 std::string pieceNota = "kKqQrRnNbBpP";
 class Piece {
 protected:
@@ -20,7 +22,7 @@ public:
 	char getType() const;
 	bool gethasMoved() const;
 	//pure virtual per piece functions
-	virtual void move(const std::string& dest) = 0;
-	virtual bool isValidMove(const std::string& dest) = 0;
+	virtual void move(const std::string& dest, Piece* board[][BOARD_SIZE]) = 0;
+	virtual bool isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE]) = 0;
 	virtual void eat(Piece& other) = 0;
 };

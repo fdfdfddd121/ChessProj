@@ -12,7 +12,7 @@ public:
 	//getters
 	bool getIsChecked() const;
 	//implement Piece functions
-	virtual void move(const std::string& dest);
-	virtual bool isValidMove(const std::string& dest);
+	virtual void move(const std::string& dest, Piece* board[][BOARD_SIZE]);
+	virtual bool isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE]);
 	virtual void eat(Piece& other);
 };
