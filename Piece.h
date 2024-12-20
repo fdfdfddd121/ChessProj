@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+std::string pieceNota = "kKqQrRnNbBpP";
 class Piece {
 protected:
 	std::string _place;
