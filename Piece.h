@@ -7,7 +7,7 @@ protected:
 	char _type;
 	bool _hasMoved;
 public:
-	//basic object actions
+	//basic class functions
 	Piece(const std::string& place, const char type);
 	virtual ~Piece();
 	//setters
