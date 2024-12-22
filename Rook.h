@@ -1,16 +1,13 @@
 #pragma once
 #include "Piece.h"
-class King : public Piece {
+class Rook : public Piece {
 private:
 	bool _isChecked;
 public:
 	//basic class functions
-	King(const std::string& place, const char type);
-	virtual ~King();
-	//setters
-	void setIsChecked(const bool isChecked);
-	//getters
-	bool getIsChecked() const;
+	Rook(const std::string& place, const char type);
+	virtual ~Rook();
+
 	//implement Piece functions
 	virtual void move(const std::string& dest, Piece* board[][BOARD_SIZE]) override;
 	virtual bool isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE]) override;

@@ -45,7 +45,3 @@ bool King::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])
 	}
 	return valid;
 }
-
-void King::eat(Piece& other)
-{
-}

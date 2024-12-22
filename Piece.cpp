@@ -59,3 +59,7 @@ bool Piece::gethasMoved() const
 {
 	return _hasMoved;
 }
+
+void Piece::eat(Piece& other)
+{
+}

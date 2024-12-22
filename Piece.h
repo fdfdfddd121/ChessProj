@@ -24,5 +24,5 @@ public:
 	//pure virtual per piece functions
 	virtual void move(const std::string& dest, Piece* board[][BOARD_SIZE]) = 0;
 	virtual bool isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE]) = 0;
-	virtual void eat(Piece& other) = 0;
+	void eat(Piece& other);  //not virtual, eat is the same in all, valid is different
 };
