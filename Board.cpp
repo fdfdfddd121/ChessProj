@@ -15,6 +15,7 @@ Board::Board(Piece* _pieces[BOARD_SIZE][BOARD_SIZE], const bool turn = 0)
 	{
 		for (int j = 0; j < BOARD_SIZE; j++)
 		{
+			//piece needs to made as a pointer of the exact type, need to make piece creation system based on letter 
 			this->_pieces[i][j] = new Piece(indexToPlace(i,j),startingBoard[i + j]);
 		}
 	}
@@ -43,7 +44,7 @@ void Board::printBoard() const
 	}
 }
 
-//turns an index [i, j] 
+//turns an index [i, j] to a placement, ie. e4
 std::string indexToPlace(int i, int j)
 {
 	std::string place = "";
