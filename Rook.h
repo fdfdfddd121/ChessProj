@@ -1,8 +1,6 @@
 #pragma once
 #include "Piece.h"
 class Rook : public Piece {
-private:
-	bool _isChecked;
 public:
 	//basic class functions
 	Rook(const std::string& place, const char type);
