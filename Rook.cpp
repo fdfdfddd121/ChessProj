@@ -20,8 +20,12 @@ void Rook::move(const std::string& dest, Piece* board[][BOARD_SIZE])
 
 	if (isValidMove(dest, board))
 	{
-		delete board[int(destIndex/10)][destIndex%10];
-
+		//in eat function if null we do nothing, implement in piece.cpp
+		eat(*board[int(destIndex/10)][destIndex%10]);
+	}
+	else
+	{
+		//throw the fucking exception
 	}
 	setPlace(dest);
 
