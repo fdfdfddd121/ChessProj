@@ -20,8 +20,10 @@ public:
 	bool getIsWhite() const;
 	char getType() const;
 	bool gethasMoved() const;
+	//piece functions
+	void eat(Piece& other);
 	//pure virtual per piece functions
 	virtual void move(const std::string& dest, Piece* board[][BOARD_SIZE]) = 0;
 	virtual bool isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE]) = 0;
-	void eat(Piece& other);  //not virtual, eat is the same in all, valid is different
+	virtual bool isValidMove(const Piece& other, Piece* board[][BOARD_SIZE]) = 0;
 };
