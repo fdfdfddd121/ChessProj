@@ -2,7 +2,6 @@
 #include <string>
 
 #define BOARD_SIZE 8
-std::string pieceNota = "kKqQrRnNbBpP";
 class Piece {
 protected:
 	std::string _place;

@@ -1,5 +1,5 @@
 #include "Piece.h"
-
+std::string pieceNota = "kKqQrRnNbBpP";
 Piece::Piece(const std::string& place, const char type):
 	_hasMoved(false)
 {
