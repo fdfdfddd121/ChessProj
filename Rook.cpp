@@ -21,6 +21,7 @@ void Rook::move(const std::string& dest, Piece* board[][BOARD_SIZE])
 	if (isValidMove(dest, board))
 	{
 		delete board[int(destIndex/10)][destIndex%10];
+
 	}
 	setPlace(dest);
 
