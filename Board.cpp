@@ -81,3 +81,14 @@ std::string Board::indexToPlace(int i, int j)
 
 	return place;
 }
+
+//turns aplacement to an index ij (i is ans/10 and j is ans%10)
+int Board::placeToIndex(std::string place)
+{
+	int ans = 0;
+
+	ans += (8 + int(place[1]));
+	ans += (int(place[0]) - int('a'));
+
+	return ans;
+}
