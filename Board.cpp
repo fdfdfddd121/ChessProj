@@ -22,7 +22,7 @@ Board::Board(Piece* pieces[BOARD_SIZE][BOARD_SIZE], const bool turn)
 		{
 			if (startingBoard[i + j] == 'R' || startingBoard[i + j] == 'r')
 			{
-				this->_pieces[i][j] = new Rook(indexToPlace(i, j), startingBoard[i + j]);
+				this->_pieces[i][j] = new Rook(this->_pieces[i][j]->indexToPlace(i, j), startingBoard[i + j]);
 			}
 			else if (startingBoard[i + j] == 'N' || startingBoard[i + j] == 'n')
 			{
@@ -34,7 +34,7 @@ Board::Board(Piece* pieces[BOARD_SIZE][BOARD_SIZE], const bool turn)
 			}
 			else if (startingBoard[i + j] == 'K' || startingBoard[i + j] == 'k')
 			{
-				this->_pieces[i][j] = new King(indexToPlace(i, j), startingBoard[i + j]);
+				this->_pieces[i][j] = new King(this->_pieces[i][j]->indexToPlace(i, j), startingBoard[i + j]);
 			}
 			else if (startingBoard[i + j] == 'Q' || startingBoard[i + j] == 'q')
 			{
@@ -69,26 +69,4 @@ void Board::printBoard() const
 		}
 		std::cout << '\n';
 	}
-}
-
-//turns an index [i, j] to a placement, ie. e4
-std::string Board::indexToPlace(int i, int j)
-{
-	std::string place = "";
-
-	place += (int('a') + j);
-	place += (8 - i);
-
-	return place;
-}
-
-//turns aplacement to an index ij (i is ans/10 and j is ans%10)
-int Board::placeToIndex(std::string place)
-{
-	int ans = 0;
-
-	ans += (8 + int(place[1]));
-	ans += (int(place[0]) - int('a'));
-
-	return ans;
 }

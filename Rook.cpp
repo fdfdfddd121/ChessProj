@@ -1,4 +1,5 @@
 #include "Rook.h"
+#include "Board.h"
 
 Rook::Rook(const std::string& place, const char type):
 	Piece(place, type)
@@ -14,11 +15,15 @@ Rook::~Rook()
 
 void Rook::move(const std::string& dest, Piece* board[][BOARD_SIZE])
 {
+	std::string pastPlace = this->getPlace();
+	int destIndex = this->placeToIndex(dest);
+
 	if (isValidMove(dest, board))
 	{
-
+		delete board[int(destIndex/10)][destIndex%10];
 	}
 	setPlace(dest);
+
 }
 
 bool Rook::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])

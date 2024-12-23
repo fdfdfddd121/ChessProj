@@ -3,9 +3,6 @@
 #define BOARD_SIZE 8
 
 class Board {
-private:
-	std::string indexToPlace(int i, int j);
-	int placeToIndex(std::string place);
 protected:
 	Piece* _pieces[BOARD_SIZE][BOARD_SIZE];
 	bool _turn;
@@ -15,7 +12,4 @@ public:
 	virtual ~Board();
 	void startGame();
 	void printBoard() const;
-
-	std::string indexToPlace(int i, int j);
-	int placeToIndex(std::string place);
 };

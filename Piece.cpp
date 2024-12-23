@@ -63,3 +63,25 @@ bool Piece::gethasMoved() const
 void Piece::eat(Piece& other)
 {
 }
+
+//turns an index [i, j] to a placement, ie. e4
+std::string Piece::indexToPlace(int i, int j)
+{
+	std::string place = "";
+
+	place += (int('a') + j);
+	place += (BOARD_SIZE - i);
+
+	return place;
+}
+
+//turns aplacement to an index ij (i is ans/10 and j is ans%10)
+int Piece::placeToIndex(std::string place)
+{
+	int ans = 0;
+
+	ans += (BOARD_SIZE - int(place[1]));
+	ans += (int(place[0]) - int('a'));
+
+	return ans;
+}
