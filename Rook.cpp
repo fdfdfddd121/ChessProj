@@ -3,6 +3,9 @@
 Rook::Rook(const std::string& place, const char type):
 	Piece(place, type)
 {
+	this->_hasMoved = false;
+	this->_type = type;
+	this->_place = place;
 }
 
 Rook::~Rook()
