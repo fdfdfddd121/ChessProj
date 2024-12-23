@@ -44,6 +44,10 @@ Board::Board(Piece* pieces[BOARD_SIZE][BOARD_SIZE], const bool turn)
 			{
 
 			}
+			else if (startingBoard[i + j] == '#')
+			{
+				this->_pieces[i][j] = NULL;
+			}
 		}
 	}
 }
