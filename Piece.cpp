@@ -81,6 +81,7 @@ int Piece::placeToIndex(std::string place)
 	int ans = 0;
 
 	ans += (BOARD_SIZE - int(place[1]));
+	ans *= 10;
 	ans += (int(place[0]) - int('a'));
 
 	return ans;
