@@ -21,12 +21,19 @@ void Piece::setPlace(const std::string& place, Piece* board[][BOARD_SIZE])
 	{
 		throw 7;
 	}
-	int old_place = placeToIndex(_place);
-	Piece* this_piece = board[old_place/10][old_place%10];
-	_place = place;
-	int new_place = placeToIndex(_place);
-	board[new_place / 10][new_place % 10] = this_piece;
-	board[old_place / 10][old_place % 10]=NULL;
+	if (!_place.empty())
+	{
+		int old_place = placeToIndex(_place);
+		Piece* this_piece = board[old_place / 10][old_place % 10];
+		_place = place;
+		int new_place = placeToIndex(_place);
+		board[new_place / 10][new_place % 10] = this_piece;
+		board[old_place / 10][old_place % 10] = NULL;
+	}
+	else
+	{
+		_place = place;
+	}
 
 }
 
@@ -75,7 +82,7 @@ std::string Piece::indexToPlace(int i, int j)
 {
 	std::string place = "";
 
-	place += (int('a') + j); // j
+	place += ('a' + j); // j
 	place += (BOARD_SIZE - i) + '1' - 1; // i
 
 	return place; // ji

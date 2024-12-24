@@ -27,6 +27,6 @@ public:
 	virtual bool isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE]) = 0;
 	virtual bool isValidMove(const Piece& other, Piece* board[][BOARD_SIZE]) = 0;
 	//converters
-	std::string indexToPlace(int i, int j);
-	int placeToIndex(std::string place);
+	static std::string indexToPlace(int i, int j);
+	static int placeToIndex(std::string place);
 };

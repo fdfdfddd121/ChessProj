@@ -13,7 +13,7 @@ public:
 	//basic class functions
 	Board(const bool turn = 0);
 	virtual ~Board();
-	
+	std::string makeMove(std::string move);
 	void printBoard() const;
 	void flipTurn();
 	std::string getBoard() const;

@@ -57,14 +57,7 @@ void main()
 		// according the protocol. Ex: e2e4           (move e2 to e4)
 		
 		
-		strcpy_s(msgToGraphics, "YOUR CODE"); // msgToGraphics should contain the result of the operation
-
-		/******* JUST FOR EREZ DEBUGGING ******/
-		int r = rand() % 10; // just for debugging......
-		msgToGraphics[0] = (char)(1 + '0');
-		msgToGraphics[1] = 0;
-		/******* JUST FOR EREZ DEBUGGING ******/
-
+		strcpy_s(msgToGraphics, chess_board.makeMove(msgFromGraphics).c_str()); // msgToGraphics should contain the result of the operation
 
 		// return result to graphics		
 		p.sendMessageToGraphics(msgToGraphics);   

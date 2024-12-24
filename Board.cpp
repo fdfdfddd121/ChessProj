@@ -8,6 +8,7 @@
 
 Board::Board(const bool turn)
 {
+	std::string place = "";
 	this->_turn = turn;
 	for (int i = 0; i < BOARD_SIZE; i++)
 	{
@@ -22,7 +23,8 @@ Board::Board(const bool turn)
 		{
 			if (startingBoard[i + j] == 'R' || startingBoard[i + j] == 'r')
 			{
-				this->_pieces[i][j] = new Rook(this->_pieces[i][j]->indexToPlace(i, j), startingBoard[i + j], this->_pieces);
+				place = Piece::indexToPlace(i, j);
+				this->_pieces[i][j] = new Rook(place, startingBoard[i + j], this->_pieces);
 			}
 			else if (startingBoard[i + j] == 'N' || startingBoard[i + j] == 'n')
 			{
@@ -34,14 +36,15 @@ Board::Board(const bool turn)
 			}
 			else if (startingBoard[i + j] == 'K' || startingBoard[i + j] == 'k')
 			{
-				this->_pieces[i][j] = new King(this->_pieces[i][j]->indexToPlace(i, j), startingBoard[i + j], this->_pieces);
+				place = Piece::indexToPlace(i, j);
+				this->_pieces[i][j] = new King(place, startingBoard[i + j], this->_pieces);
 				if (startingBoard[i + j] == 'K')
 				{
-					_WhiteKing = this->_pieces[i][j];
+					_WhiteKing =(King*) this->_pieces[i][j];
 				}
-				if (startingBoard[i + j] == 'k')
+				else if (startingBoard[i + j] == 'k')
 				{
-					_BlackKing = this->_pieces[i][j];
+					_BlackKing =(King*) this->_pieces[i][j];
 				}
 			}
 			else if (startingBoard[i + j] == 'Q' || startingBoard[i + j] == 'q')
@@ -69,6 +72,51 @@ Board::~Board()
 			delete this->_pieces[i][j];
 		}
 	}
+}
+
+std::string Board::makeMove(std::string move)
+{
+	std::string msg = "";
+	std::string src = move.substr(0, 3);
+	std::string dest = move.substr(3);
+	bool checked;
+	try
+	{
+		_pieces[Piece::placeToIndex(src) / 10][Piece::placeToIndex(src) % 10]->move(dest, _pieces);
+	}
+	catch (int code)
+	{
+		msg += code + '0';
+		return msg;
+	}
+	if (_turn)
+	{
+		checked = ((King*)_WhiteKing)->isChecked(_WhiteKing->getPlace(), _pieces);
+		((King*)_WhiteKing)->setIsChecked(checked);
+		if (checked)
+		{
+			msg = '1';
+		}
+		else
+		{
+			msg = '0';
+		}
+	}
+	else
+	{
+		checked = ((King*)_BlackKing)->isChecked(_BlackKing->getPlace(), _pieces);
+		((King*)_BlackKing)->setIsChecked(checked);
+		if (checked)
+		{
+			msg = '1';
+		}
+		else
+		{
+			msg = '0';
+		}
+	}
+
+	return msg;
 }
 
 void Board::printBoard() const
