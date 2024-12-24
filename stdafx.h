@@ -11,6 +11,10 @@
 
 #include <stdio.h>
 #include <tchar.h>
+#include "Piece.h"
+#include "Rook.h"
+#include "Board.h"
+#include "King.h"
 
 
 // TODO: reference additional headers your program requires here
