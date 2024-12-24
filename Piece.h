@@ -9,7 +9,7 @@ protected:
 	bool _hasMoved;
 public:
 	//basic class functions
-	Piece(const std::string& place, const char type);
+	Piece(const std::string& place, const char type, Piece* board[][BOARD_SIZE]);
 	virtual ~Piece();
 	//setters
 	void setPlace(const std::string& place, Piece* board[][BOARD_SIZE]);

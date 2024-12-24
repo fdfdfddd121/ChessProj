@@ -1,7 +1,7 @@
 #include "King.h"
 
-King::King(const std::string& place, const char type):
-	Piece(place,type), _isChecked(false)
+King::King(const std::string& place, const char type, Piece* board[][BOARD_SIZE]):
+	Piece(place,type, board), _isChecked(false)
 {
 }
 
@@ -25,7 +25,7 @@ void King::move(const std::string& dest, Piece* board[][BOARD_SIZE])
 	{
 		throw 6;
 	}
-	setPlace(dest);
+	setPlace(dest, board);
 }
 
 bool King::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])

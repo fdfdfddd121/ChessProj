@@ -1,8 +1,8 @@
 #include "Rook.h"
 #include "Board.h"
 
-Rook::Rook(const std::string& place, const char type):
-	Piece(place, type)
+Rook::Rook(const std::string& place, const char type, Piece* board[][BOARD_SIZE]):
+	Piece(place, type, board)
 {
 	this->_hasMoved = false;
 	this->_type = type;

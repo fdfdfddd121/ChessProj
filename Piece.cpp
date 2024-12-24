@@ -1,9 +1,9 @@
 #include "Piece.h"
 std::string pieceNota = "kKqQrRnNbBpP";
-Piece::Piece(const std::string& place, const char type):
+Piece::Piece(const std::string& place, const char type, Piece* board[][BOARD_SIZE]):
 	_hasMoved(false)
 {
-	setPlace(place);
+	setPlace(place, board);
 	setType(type);
 }
 

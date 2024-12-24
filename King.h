@@ -5,7 +5,7 @@ private:
 	bool _isChecked;
 public:
 	//basic class functions
-	King(const std::string& place, const char type);
+	King(const std::string& place, const char type, Piece* board[][BOARD_SIZE]);
 	virtual ~King();
 	//setters
 	void setIsChecked(const bool isChecked);

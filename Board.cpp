@@ -22,7 +22,7 @@ Board::Board(const bool turn)
 		{
 			if (startingBoard[i + j] == 'R' || startingBoard[i + j] == 'r')
 			{
-				this->_pieces[i][j] = new Rook(this->_pieces[i][j]->indexToPlace(i, j), startingBoard[i + j]);
+				this->_pieces[i][j] = new Rook(this->_pieces[i][j]->indexToPlace(i, j), startingBoard[i + j], this->_pieces);
 			}
 			else if (startingBoard[i + j] == 'N' || startingBoard[i + j] == 'n')
 			{
@@ -34,7 +34,7 @@ Board::Board(const bool turn)
 			}
 			else if (startingBoard[i + j] == 'K' || startingBoard[i + j] == 'k')
 			{
-				this->_pieces[i][j] = new King(this->_pieces[i][j]->indexToPlace(i, j), startingBoard[i + j]);
+				this->_pieces[i][j] = new King(this->_pieces[i][j]->indexToPlace(i, j), startingBoard[i + j], this->_pieces);
 				if (startingBoard[i + j] == 'K')
 				{
 					_WhiteKing = this->_pieces[i][j];

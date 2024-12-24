@@ -3,7 +3,7 @@
 class Rook : public Piece {
 public:
 	//basic class functions
-	Rook(const std::string& place, const char type);
+	Rook(const std::string& place, const char type, Piece* board[][BOARD_SIZE]);
 	virtual ~Rook();
 
 	//implement Piece functions
