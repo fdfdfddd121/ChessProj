@@ -11,7 +11,7 @@ Piece::~Piece()
 {
 }
 
-void Piece::setPlace(const std::string& place)
+void Piece::setPlace(const std::string& place, Piece* board[][BOARD_SIZE])
 {
 	if (place.length()!=2 || (place[0]<'a' || place[0]>'h') || (place[1] < '1' || place[1]>'8')) //invalid indeces(so basicaly the writing)
 	{
@@ -21,7 +21,13 @@ void Piece::setPlace(const std::string& place)
 	{
 		throw 7;
 	}
+	int old_place = placeToIndex(_place);
+	Piece* this_piece = board[old_place/10][old_place%10];
 	_place = place;
+	int new_place = placeToIndex(_place);
+	board[new_place / 10][new_place % 10] = this_piece;
+	board[old_place / 10][old_place % 10]=NULL;
+
 }
 
 void Piece::setType(const char type)

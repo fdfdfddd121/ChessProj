@@ -12,7 +12,7 @@ public:
 	Piece(const std::string& place, const char type);
 	virtual ~Piece();
 	//setters
-	void setPlace(const std::string& place);
+	void setPlace(const std::string& place, Piece* board[][BOARD_SIZE]);
 	void setType(const char type);
 	void setHasMoved(const bool hasMoved);
 	//getters
