@@ -35,6 +35,14 @@ Board::Board(const bool turn)
 			else if (startingBoard[i + j] == 'K' || startingBoard[i + j] == 'k')
 			{
 				this->_pieces[i][j] = new King(this->_pieces[i][j]->indexToPlace(i, j), startingBoard[i + j]);
+				if (startingBoard[i + j] == 'K')
+				{
+					_WhiteKing = this->_pieces[i][j];
+				}
+				if (startingBoard[i + j] == 'k')
+				{
+					_BlackKing = this->_pieces[i][j];
+				}
 			}
 			else if (startingBoard[i + j] == 'Q' || startingBoard[i + j] == 'q')
 			{
@@ -82,7 +90,7 @@ void Board::flipTurn()
 
 std::string Board::getBoard() const
 {
-	return startingBoard;
+	return startingBoard+(_turn+'0');
 }
 //exceptionHandler
 int Board::exceptionHandler(const std::string& source, const std::string& dest, Piece* board[][BOARD_SIZE], Piece& piece)
