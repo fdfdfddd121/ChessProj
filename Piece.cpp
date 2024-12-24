@@ -69,10 +69,10 @@ std::string Piece::indexToPlace(int i, int j)
 {
 	std::string place = "";
 
-	place += (int('a') + j);
-	place += (BOARD_SIZE - i);
+	place += (int('a') + j); // j
+	place += (BOARD_SIZE - i); // i
 
-	return place;
+	return place; // ji
 }
 
 //turns aplacement to an index ij (i is ans/10 and j is ans%10)
@@ -80,9 +80,9 @@ int Piece::placeToIndex(std::string place)
 {
 	int ans = 0;
 
-	ans += (int(place[0]) - int('a'));
+	ans += (BOARD_SIZE - int(place[1])); // i
 	ans *= 10;
-	ans += (BOARD_SIZE - int(place[1]));
-
-	return ans;
+	ans += (int(place[0]) - int('a')); //j
+	
+	return ans; // ij
 }
