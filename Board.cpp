@@ -75,6 +75,11 @@ void Board::printBoard() const
 	}
 }
 
+void Board::flipTurn()
+{
+	_turn = !_turn;
+}
+
 std::string Board::getBoard() const
 {
 	return startingBoard;

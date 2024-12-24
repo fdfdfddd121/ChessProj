@@ -44,8 +44,6 @@ void main()
 
 	char msgToGraphics[1024];
 	// msgToGraphics should contain the board string accord the protocol
-	// YOUR CODE
-
 	strcpy_s(msgToGraphics, chess_board.getBoard().c_str());
 	
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
