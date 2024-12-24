@@ -85,7 +85,7 @@ std::string Piece::indexToPlace(int i, int j)
 	std::string place = "";
 
 	place += ('a' + j); // j
-	place += (BOARD_SIZE - i) + '1' - 1; // i
+	place += (i + '1'); // i
 
 	return place; // ji
 }
@@ -95,7 +95,7 @@ int Piece::placeToIndex(std::string place)
 {
 	int ans = 0;
 
-	ans += (BOARD_SIZE - (int(place[1]) - '1')); // i
+	ans += (int(place[1]) - '1'); // i
 	ans *= 10;
 	ans += (int(place[0]) - int('a')); //j
 	

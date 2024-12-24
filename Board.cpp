@@ -4,13 +4,15 @@
 #include <iostream>
 
 //top left is [0][0] as it is wayyy easier to look at while running over the array
-#define startingBoard "RNBKQBNRPPPPPPPP################################pppppppprnbkqbnr"
+//#define startingBoard "RNBKQBNRPPPPPPPP################################pppppppprnbkqbnr"
+#define startingBoard "R##K###R################################################r##k###r"
 
 Board::Board(const bool turn)
 {
 	this->_BlackKing = NULL;
 	this->_WhiteKing = NULL;
 	std::string place = "";
+	std::string type = "";
 	this->_turn = turn;
 	for (int i = 0; i < BOARD_SIZE; i++)
 	{
@@ -26,6 +28,7 @@ Board::Board(const bool turn)
 			if (startingBoard[i + j] == 'R' || startingBoard[i + j] == 'r')
 			{
 				place = Piece::indexToPlace(i, j);
+				type = startingBoard[i + j];
 				this->_pieces[i][j] = new Rook(place, startingBoard[i + j], this->_pieces);
 			}
 			else if (startingBoard[i + j] == 'N' || startingBoard[i + j] == 'n')
@@ -79,19 +82,20 @@ Board::~Board()
 std::string Board::makeMove(std::string move)
 {
 	std::string msg = "";
-	std::string src = move.substr(0, 3);
-	std::string dest = move.substr(3);
+	std::string src = move.substr(0, 2);
+	std::string dest = move.substr(2);
 	bool checked;
 	try
 	{
-		_pieces[Piece::placeToIndex(src) / 10][Piece::placeToIndex(src) % 10]->move(dest, _pieces);
+		int src_idx = Piece::placeToIndex(src);
+		_pieces[src_idx / 10][src_idx % 10]->move(dest, _pieces);
 	}
 	catch (int code)
 	{
 		msg += code + '0';
 		return msg;
 	}
-	if (_turn)
+	if (!_turn)
 	{
 		checked = ((King*)_WhiteKing)->isChecked(_WhiteKing->getPlace(), _pieces);
 		((King*)_WhiteKing)->setIsChecked(checked);
@@ -117,7 +121,7 @@ std::string Board::makeMove(std::string move)
 			msg = '0';
 		}
 	}
-
+	flipTurn();
 	return msg;
 }
 
