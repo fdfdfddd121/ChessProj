@@ -84,3 +84,43 @@ std::string Board::getBoard() const
 {
 	return startingBoard;
 }
+//exceptionHandler
+int Board::exceptionHandler(const std::string& source, const std::string& dest, Piece* board[][BOARD_SIZE], Piece& piece)
+{
+	//getting the indexes for the placements
+	int intSource = piece.placeToIndex(source), intDest = piece.placeToIndex(dest);
+	int sourceI = intSource % 10, sourceJ = intSource / 10;
+	int destI = intDest % 10, destJ = intDest / 10;
+
+	if (board[sourceI][sourceJ] == NULL)
+	{
+		throw 2;
+	}
+
+	else if (board[sourceI][sourceJ]->getIsWhite() == board[destI][destJ]->getIsWhite())
+	{
+		throw 3;
+	}
+
+	else if (false) //if after the move the king is in check
+	{
+		throw 4;
+	}
+
+	else if (sourceI > BOARD_SIZE - 1 || sourceI < 0 || sourceJ > BOARD_SIZE - 1 || sourceJ < 0 || destI > BOARD_SIZE - 1 || destI < 0 || destJ > BOARD_SIZE - 1 || destJ < 0)
+	{
+		throw 5;
+	}
+
+	else if (intSource == intDest)
+	{
+		throw 7;
+	}
+
+	else
+	{
+		throw 6; //if the move is from the start not valid and none of the other problems it must be this (invalid move from the piece type)
+	}
+
+}
+

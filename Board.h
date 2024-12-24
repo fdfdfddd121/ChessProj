@@ -6,11 +6,15 @@ class Board {
 protected:
 	Piece* _pieces[BOARD_SIZE][BOARD_SIZE];
 	bool _turn;
+	int exceptionHandler(const std::string& source, const std::string& dest, Piece* board[][BOARD_SIZE], Piece& piece);
+	Piece* _WhiteKing;
+	Piece* _BlackKing;
 public:
 	//basic class functions
 	Board(const bool turn = 0);
 	virtual ~Board();
-	void startGame();
+	
 	void printBoard() const;
+	void flipTurn();
 	std::string getBoard() const;
 };
