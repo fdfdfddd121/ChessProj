@@ -3,7 +3,7 @@ This file servers as an example of how to use Pipe.h file.
 It is recommended to use the following code in your project, 
 in order to read and write information from and to the Backend
 */
-
+#include "Board.h"
 #include "Pipe.h"
 #include <iostream>
 #include <thread>
@@ -16,7 +16,7 @@ using std::string;
 void main()
 {
 	srand(time_t(NULL));
-
+	Board chess_board();
 	
 	Pipe p;
 	bool isConnect = p.connect();

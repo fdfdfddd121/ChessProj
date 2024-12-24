@@ -8,7 +8,7 @@ protected:
 	bool _turn;
 public:
 	//basic class functions
-	Board(Piece* pieces[BOARD_SIZE][BOARD_SIZE], const bool turn = 0);
+	Board(const bool turn = 0);
 	virtual ~Board();
 	void startGame();
 	void printBoard() const;
