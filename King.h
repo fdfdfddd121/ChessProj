@@ -15,4 +15,5 @@ public:
 	virtual void move(const std::string& dest, Piece* board[][BOARD_SIZE]) override;
 	virtual bool isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE]) override;
 	virtual bool isValidMove(const Piece& other, Piece* board[][BOARD_SIZE]) override;
+	void isChecked(Piece* board[][BOARD_SIZE]);
 };

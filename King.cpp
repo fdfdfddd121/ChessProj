@@ -56,3 +56,12 @@ bool King::isValidMove(const Piece& other, Piece* board[][BOARD_SIZE])
 	return isValidMove(other.getPlace(),board);
 }
 
+/*
+void King::isChecked(Piece* board[][BOARD_SIZE])
+{
+	bool answer = false;
+
+	while()
+
+}
+*/
