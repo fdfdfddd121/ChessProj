@@ -6,7 +6,7 @@
 //top left is [0][0] as it is wayyy easier to look at while running over the array
 #define startingBoard "RNBKQBNRPPPPPPPP################################pppppppprnbkqbnr"
 
-Board::Board(Piece* pieces[BOARD_SIZE][BOARD_SIZE], const bool turn)
+Board::Board(const bool turn)
 {
 	this->_turn = turn;
 	for (int i = 0; i < BOARD_SIZE; i++)
