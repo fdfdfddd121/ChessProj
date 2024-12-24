@@ -8,6 +8,8 @@
 
 Board::Board(const bool turn)
 {
+	this->_BlackKing = NULL;
+	this->_WhiteKing = NULL;
 	std::string place = "";
 	this->_turn = turn;
 	for (int i = 0; i < BOARD_SIZE; i++)
@@ -138,7 +140,10 @@ void Board::flipTurn()
 
 std::string Board::getBoard() const
 {
-	return startingBoard+(_turn+'0');
+	std::string bord = startingBoard;
+	char turn = char(int(_turn) + '0');
+	bord += turn;
+	return bord;
 }
 //exceptionHandler
 int Board::exceptionHandler(const std::string& source, const std::string& dest, Piece* board[][BOARD_SIZE], Piece& piece)
