@@ -16,7 +16,7 @@ using std::string;
 void main()
 {
 	srand(time_t(NULL));
-	Board chess_board();
+	Board chess_board= Board();
 	
 	Pipe p;
 	bool isConnect = p.connect();
@@ -46,7 +46,7 @@ void main()
 	// msgToGraphics should contain the board string accord the protocol
 	// YOUR CODE
 
-	strcpy_s(msgToGraphics, "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1"); // just example...
+	strcpy_s(msgToGraphics, chess_board.getBoard().c_str());
 	
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
 

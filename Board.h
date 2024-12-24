@@ -12,4 +12,5 @@ public:
 	virtual ~Board();
 	void startGame();
 	void printBoard() const;
+	std::string getBoard() const;
 };

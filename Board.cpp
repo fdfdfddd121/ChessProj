@@ -74,3 +74,8 @@ void Board::printBoard() const
 		std::cout << '\n';
 	}
 }
+
+std::string Board::getBoard() const
+{
+	return startingBoard;
+}
