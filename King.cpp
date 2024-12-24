@@ -56,12 +56,24 @@ bool King::isValidMove(const Piece& other, Piece* board[][BOARD_SIZE])
 	return isValidMove(other.getPlace(),board);
 }
 
-/*
+
 void King::isChecked(Piece* board[][BOARD_SIZE])
 {
 	bool answer = false;
 
-	while()
+	int intSource = this->placeToIndex(this->getPlace());
+	int sourceI = intSource % 10, sourceJ = intSource / 10;
 
+	for (int i = 0; i < BOARD_SIZE; i++)
+	{
+		for (int j = 0; j < BOARD_SIZE; j++)
+		{
+			if (this->getIsWhite() != board[sourceI][sourceJ]->getIsWhite() && board[sourceI][sourceJ]->isValidMove(*this, board))
+			{
+				answer = true;
+			}
+		}
+	}
+
+	this->setIsChecked(answer);
 }
-*/
