@@ -13,7 +13,9 @@ Piece::~Piece()
 
 void Piece::setPlace(const std::string& place, Piece* board[][BOARD_SIZE])
 {
-	if (place.length()!=2 || (place[0]<'a' || place[0]>'h') || (place[1] < '1' || place[1]>'8')) //invalid indeces(so basicaly the writing)
+	int intSource = placeToIndex(place);
+	int sourceI = intSource % 10, sourceJ = intSource / 10;
+	if (place.length()!=2 || (sourceI <0 || sourceI>8) || (sourceJ < 0 || sourceJ>8)) //invalid indeces(so basicaly the writing)
 	{
 		throw 5;
 	}
