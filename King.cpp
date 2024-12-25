@@ -68,14 +68,14 @@ bool King::isChecked(const std::string& source, Piece* board[][BOARD_SIZE])
 {
 	bool answer = false;
 
-	int intSource = this->placeToIndex(source);
-	int sourceI = intSource % 10, sourceJ = intSource / 10;
+	int intSource = placeToIndex(source);
+	int sourceI = intSource / 10, sourceJ = intSource % 10;
 
-	for (int i = 0; i < BOARD_SIZE; i++)
+	for (int i = 0; i < BOARD_SIZE && !answer; i++)
 	{
-		for (int j = 0; j < BOARD_SIZE; j++)
+		for (int j = 0; j < BOARD_SIZE && !answer; j++)
 		{
-			if (board[sourceI][sourceJ] != NULL && this->getIsWhite() != board[sourceI][sourceJ]->getIsWhite() && board[sourceI][sourceJ]->isValidMove(*this, board))
+			if (board[i][j] != NULL && (board[i][j]->getIsWhite() != board[sourceI][sourceJ]->getIsWhite()) && (*board[i][j]).isValidMove(source, board))
 			{
 				answer = true;
 			}

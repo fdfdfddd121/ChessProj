@@ -105,7 +105,7 @@ std::string Board::makeMove(std::string move)
 		msg += code + '0';
 		return msg;
 	}
-	if (!_turn)
+	if (_turn)
 	{
 		checked = ((King*)_WhiteKing)->isChecked(_WhiteKing->getPlace(), _pieces);
 		((King*)_WhiteKing)->setIsChecked(checked);
