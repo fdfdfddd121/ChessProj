@@ -184,12 +184,10 @@ void Board::exceptionHandler(const std::string& source, const std::string& dest,
 		throw 3;
 	}
 
-	/*
-	else if (false) //if after the move the king is in check
+	else if (King::isChecked(_WhiteKing->getPlace(), &_WhiteKing, board) || King::isChecked(_BlackKing->getPlace(), &_BlackKing, board))
 	{
-		throw 4; is thrown already in king, not needed here
+		throw 4; 
 	}
-	*/
 
 	else if (sourceI > BOARD_SIZE - 1 || sourceI < 0 || sourceJ > BOARD_SIZE - 1 || sourceJ < 0 || destI > BOARD_SIZE - 1 || destI < 0 || destJ > BOARD_SIZE - 1 || destJ < 0)
 	{

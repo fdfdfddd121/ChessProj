@@ -6,8 +6,8 @@ class Board {
 protected:
 	Piece* _pieces[BOARD_SIZE][BOARD_SIZE];
 	bool _turn;
-	Piece* _WhiteKing;
-	Piece* _BlackKing;
+	static Piece* _WhiteKing;
+	static Piece* _BlackKing;
 public:
 	//basic class functions
 	Board(const bool turn = 0);
