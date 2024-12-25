@@ -77,6 +77,7 @@ bool Piece::gethasMoved() const
 
 void Piece::eat(Piece& other)
 {
+	delete &other;
 }
 
 //turns an index [i, j] to a placement, ie. e4

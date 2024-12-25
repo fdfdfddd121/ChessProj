@@ -150,7 +150,7 @@ std::string Board::getBoard() const
 	return bord;
 }
 //exceptionHandler
-int Board::exceptionHandler(const std::string& source, const std::string& dest, Piece* board[][BOARD_SIZE], Piece& piece)
+void Board::exceptionHandler(const std::string& source, const std::string& dest, Piece* board[][BOARD_SIZE], Piece& piece)
 {
 	//getting the indexes for the placements
 	int intSource = piece.placeToIndex(source), intDest = piece.placeToIndex(dest);

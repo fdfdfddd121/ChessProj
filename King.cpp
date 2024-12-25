@@ -1,4 +1,5 @@
 #include "King.h"
+#include "Board.h"
 
 King::King(const std::string& place, const char type, Piece* board[][BOARD_SIZE]):
 	Piece(place,type, board), _isChecked(false)
@@ -21,9 +22,18 @@ bool King::getIsChecked() const
 
 void King::move(const std::string& dest, Piece* board[][BOARD_SIZE])
 {
-	if (!isValidMove(dest, board)) //check for valid move and exceptions that get thrown come before this exception
+	std::string pastPlace = this->getPlace();
+	int destIndex = this->placeToIndex(dest);
+
+	if (isValidMove(dest, board))
 	{
-		throw 6;
+		//in eat function if null we do nothing, implement in piece.cpp
+		eat(*board[int(destIndex / 10)][destIndex % 10]);
+	}
+	else
+	{
+		//throw the fucking exception
+		Board::exceptionHandler(this->getPlace(), dest, board, *this);
 	}
 	setPlace(dest, board);
 }
