@@ -81,6 +81,7 @@ Board::~Board()
 
 std::string Board::makeMove(std::string move)
 {
+	//[i][j]
 	//mov - e2e4
 	std::string msg = "";
 	std::string src = move.substr(0, 2); //e2
@@ -89,7 +90,7 @@ std::string Board::makeMove(std::string move)
 	try
 	{
 		int src_idx = Piece::placeToIndex(src);
-		int sourceI = src_idx % 10, sourceJ = src_idx / 10;
+		int sourceI = src_idx / 10, sourceJ = src_idx % 10;
 		Board::exceptionHandler(src,dest,_pieces);
 		_pieces[sourceI][sourceJ]->move(dest, _pieces); //runtime error HERE on all cases for some reason
 	}
