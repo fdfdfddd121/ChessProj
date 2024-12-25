@@ -47,9 +47,13 @@ bool King::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])
 	{
 		throw 7;
 	}
-	else if ((destI == (srcI + 1) || destI == (srcI - 1) || (destI == srcI)) && (destJ == (srcJ + 1) || destJ == (srcJ - 1)) || (destJ == srcJ))
+	else if ((destI == (srcI + 1) || destI == (srcI - 1) || (destI == srcI)) && (destJ == (srcJ + 1) || destJ == (srcJ - 1)) || (destJ == srcJ) && (destI == (srcI + 1) || destI == (srcI - 1)))
 	{
 		valid = !isChecked(dest, board);
+	}
+	else
+	{
+		valid = false;
 	}
 	return valid;
 }
