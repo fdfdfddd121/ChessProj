@@ -187,7 +187,7 @@ void Board::exceptionHandler(const std::string& source, const std::string& dest,
 		throw 3;
 	}
 
-	else if ((board[sourceI][sourceJ]->getIsWhite() && King::isChecked(_WhiteKing->getPlace(), *(King*)_WhiteKing, board) && board[sourceI][sourceJ]->getType() != 'K') || (!board[sourceI][sourceJ]->getIsWhite() && King::isChecked(_BlackKing->getPlace(), *(King*)_BlackKing, board) && board[sourceI][sourceJ]->getType() != 'k'))
+	else if (King::isChecked(_WhiteKing->getPlace(), *(King*)_WhiteKing, board) || King::isChecked(_BlackKing->getPlace(), *(King*)_BlackKing, board))
 	{
 		throw 4; 
 	}
