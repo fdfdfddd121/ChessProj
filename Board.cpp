@@ -66,6 +66,7 @@ Board::Board(const bool turn)
 			iter++;
 		}
 	}
+	printBoard();
 }
 
 Board::~Board()
@@ -93,6 +94,7 @@ std::string Board::makeMove(std::string move)
 		int sourceI = src_idx / 10, sourceJ = src_idx % 10;
 		Board::exceptionHandler(src,dest,_pieces);
 		_pieces[sourceI][sourceJ]->move(dest, _pieces); //runtime error HERE on all cases for some reason
+		printBoard();
 	}
 	catch (int code)
 	{
@@ -135,7 +137,14 @@ void Board::printBoard() const
 	{
 		for (int j = 0; j < BOARD_SIZE; j++)
 		{
-			std::cout << this->_pieces[i][j] << " ";
+			if (_pieces[i][j] == NULL)
+			{
+				std::cout << "#" << " ";
+			}
+			else
+			{
+				std::cout << this->_pieces[i][j]->getType() << " ";
+			}
 		}
 		std::cout << '\n';
 	}

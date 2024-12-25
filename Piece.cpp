@@ -88,7 +88,7 @@ std::string Piece::indexToPlace(int i, int j)
 	std::string place = "";
 
 	place += ('a' + j); // j
-	place += (i + '1'); // i
+	place += ((8 - i) + '0'); // i
 
 	return place; // ji
 }
@@ -99,7 +99,7 @@ int Piece::placeToIndex(std::string place)
 {
 	int ans = 0;
 
-	ans += (7 - (int(place[1]) - int('1'))); // i - 7
+	ans += (8 - (int(place[1]) - int('0'))); // i - 7
 	ans *= 10;
 	ans += (int(place[0]) - int('a') ); //j - 7
 	
