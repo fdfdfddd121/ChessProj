@@ -16,5 +16,5 @@ public:
 	void printBoard() const;
 	void flipTurn();
 	std::string getBoard() const;
-	static void exceptionHandler(const std::string& source, const std::string& dest, Piece* board[][BOARD_SIZE], Piece& piece);
+	static void exceptionHandler(const std::string& source, const std::string& dest, Piece* board[][BOARD_SIZE]);
 };

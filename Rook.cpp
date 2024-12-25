@@ -26,7 +26,7 @@ void Rook::move(const std::string& dest, Piece* board[][BOARD_SIZE])
 	else
 	{
 		//throw the fucking exception
-		Board::exceptionHandler(this->getPlace(), dest, board, *this);
+		Board::exceptionHandler(this->getPlace(), dest, board);
 	}
 	setPlace(dest, board);
 

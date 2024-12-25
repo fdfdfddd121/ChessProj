@@ -81,14 +81,17 @@ Board::~Board()
 
 std::string Board::makeMove(std::string move)
 {
+	//mov - e2e4
 	std::string msg = "";
-	std::string src = move.substr(0, 2);
-	std::string dest = move.substr(2);
+	std::string src = move.substr(0, 2); //e2
+	std::string dest = move.substr(2, 2); //e4
 	bool checked;
 	try
 	{
 		int src_idx = Piece::placeToIndex(src);
-		_pieces[src_idx / 10][src_idx % 10]->move(dest, _pieces);
+		int sourceI = src_idx % 10, sourceJ = src_idx / 10;
+		Board::exceptionHandler(src,dest,_pieces);
+		_pieces[sourceI][sourceJ]->move(dest, _pieces);
 	}
 	catch (int code)
 	{
@@ -150,19 +153,19 @@ std::string Board::getBoard() const
 	return bord;
 }
 //exceptionHandler
-void Board::exceptionHandler(const std::string& source, const std::string& dest, Piece* board[][BOARD_SIZE], Piece& piece)
+void Board::exceptionHandler(const std::string& source, const std::string& dest, Piece* board[][BOARD_SIZE])
 {
 	//getting the indexes for the placements
-	int intSource = piece.placeToIndex(source), intDest = piece.placeToIndex(dest);
-	int sourceI = intSource % 10, sourceJ = intSource / 10;
-	int destI = intDest % 10, destJ = intDest / 10;
+	int intSource = Piece::placeToIndex(source), intDest = Piece::placeToIndex(dest);
+	int sourceI = intSource / 10, sourceJ = intSource % 10;
+	int destI = intDest / 10, destJ = intDest % 10;
 
 	if (board[sourceI][sourceJ] == NULL)
 	{
 		throw 2;
 	}
 
-	else if (board[sourceI][sourceJ]->getIsWhite() == board[destI][destJ]->getIsWhite())
+	else if (board[destI][destJ] != NULL && board[sourceI][sourceJ]->getIsWhite() == board[destI][destJ]->getIsWhite())
 	{
 		throw 3;
 	}
@@ -183,11 +186,5 @@ void Board::exceptionHandler(const std::string& source, const std::string& dest,
 	{
 		throw 7;
 	}
-
-	else
-	{
-		throw 6; //if the move is from the start not valid and none of the other problems it must be this (invalid move from the piece type)
-	}
-
 }
 
