@@ -41,11 +41,13 @@ void King::move(const std::string& dest, Piece* board[][BOARD_SIZE])
 bool King::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])
 {
 	bool valid = false;
+	int destI = placeToIndex(dest) / 10, destJ = placeToIndex(dest) % 10;
+	int srcI = placeToIndex(_place) / 10, srcJ = placeToIndex(_place) % 10;
 	if (dest.compare(this->getPlace())==0)
 	{
 		throw 7;
 	}
-	else if ((dest[0] == (_place[0] + 1) || dest[0] == (_place[0] - 1) || (dest[0]==_place[0])) && (dest[1] == (_place[1] + 1) || dest[1] == (_place[1] - 1)) || (dest[1] == _place[1]))
+	else if ((destI == (srcI + 1) || destI == (srcI - 1) || (destI == srcI)) && (destJ == (srcJ + 1) || destJ == (srcJ - 1)) || (destJ == srcJ))
 	{
 		valid = !isChecked(dest, board);
 	}

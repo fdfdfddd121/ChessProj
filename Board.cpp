@@ -192,9 +192,9 @@ void Board::exceptionHandler(const std::string& source, const std::string& dest,
 		throw 5;
 	}
 
-	else if (intSource == intDest)
+	else if (!(*board[sourceI][sourceJ]).isValidMove(dest, board))
 	{
-		throw 7;
+		throw 6;
 	}
 }
 
