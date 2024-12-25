@@ -48,7 +48,7 @@ bool Rook::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])
 		{
 			if (destJ > srcJ)
 			{
-				for (j = srcJ; j < destJ && valid; j++)
+				for (j = srcJ + 1; j < destJ && valid; j++)
 				{
 					if (board[srcI][j] != NULL)
 					{
@@ -62,7 +62,7 @@ bool Rook::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])
 			}
 			else
 			{
-				for (j = srcJ; destJ < j && valid; j--)
+				for (j = srcJ - 1; destJ < j && valid; j--)
 				{
 					if (board[srcI][j] != NULL)
 					{
@@ -80,7 +80,7 @@ bool Rook::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])
 			int i = srcI;
 			if (destI > srcI)
 			{
-				for (i = srcI; i < destI && valid; i++)
+				for (i = srcI + 1; i < destI && valid; i++)
 				{
 					if (board[i][srcJ] != NULL)
 					{
@@ -94,7 +94,7 @@ bool Rook::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])
 			}
 			else
 			{
-				for (i = srcI; destI < i && valid; i--)
+				for (i = srcI - 1; destI < i && valid; i--)
 				{
 					if (board[i][srcJ] != NULL)
 					{
