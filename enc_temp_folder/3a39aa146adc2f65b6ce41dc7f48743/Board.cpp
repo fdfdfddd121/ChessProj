@@ -93,7 +93,7 @@ std::string Board::makeMove(std::string move)
 		int src_idx = Piece::placeToIndex(src);
 		int sourceI = src_idx / 10, sourceJ = src_idx % 10;
 		Board::exceptionHandler(src,dest,_pieces);
-		if (_pieces[sourceI][sourceJ]->getIsWhite() != !_turn)
+		if (!(_pieces[sourceI][sourceJ]->getIsWhite() && !_turn))
 		{
 			throw 2; //not yo turn!
 		}
