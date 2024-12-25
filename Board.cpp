@@ -12,7 +12,7 @@ Board::Board(const bool turn)
 	this->_BlackKing = NULL;
 	this->_WhiteKing = NULL;
 	std::string place = "";
-	std::string type = "";
+	int iter = 0;
 	this->_turn = turn;
 	for (int i = 0; i < BOARD_SIZE; i++)
 	{
@@ -25,45 +25,45 @@ Board::Board(const bool turn)
 	{
 		for (int j = 0; j < BOARD_SIZE; j++)
 		{
-			if (startingBoard[i + j] == 'R' || startingBoard[i + j] == 'r')
+			if (startingBoard[iter] == 'R' || startingBoard[iter] == 'r')
 			{
 				place = Piece::indexToPlace(i, j);
-				type = startingBoard[i + j];
-				this->_pieces[i][j] = new Rook(place, startingBoard[i + j], this->_pieces);
+				this->_pieces[i][j] = new Rook(place, startingBoard[iter], this->_pieces);
 			}
-			else if (startingBoard[i + j] == 'N' || startingBoard[i + j] == 'n')
+			else if (startingBoard[iter] == 'N' || startingBoard[iter] == 'n')
 			{
 
 			}
-			else if (startingBoard[i + j] == 'B' || startingBoard[i + j] == 'b')
+			else if (startingBoard[iter] == 'B' || startingBoard[iter] == 'b')
 			{
 
 			}
-			else if (startingBoard[i + j] == 'K' || startingBoard[i + j] == 'k')
+			else if (startingBoard[iter] == 'K' || startingBoard[iter] == 'k')
 			{
 				place = Piece::indexToPlace(i, j);
-				this->_pieces[i][j] = new King(place, startingBoard[i + j], this->_pieces);
-				if (startingBoard[i + j] == 'K')
+				this->_pieces[i][j] = new King(place, startingBoard[iter], this->_pieces);
+				if (startingBoard[iter] == 'K')
 				{
 					_WhiteKing =(King*) this->_pieces[i][j];
 				}
-				else if (startingBoard[i + j] == 'k')
+				else if (startingBoard[iter] == 'k')
 				{
 					_BlackKing =(King*) this->_pieces[i][j];
 				}
 			}
-			else if (startingBoard[i + j] == 'Q' || startingBoard[i + j] == 'q')
+			else if (startingBoard[iter] == 'Q' || startingBoard[iter] == 'q')
 			{
 
 			}
-			else if (startingBoard[i + j] == 'P' || startingBoard[i + j] == 'p')
+			else if (startingBoard[iter] == 'P' || startingBoard[iter] == 'p')
 			{
 
 			}
-			else if (startingBoard[i + j] == '#')
+			else if (startingBoard[iter] == '#')
 			{
 				this->_pieces[i][j] = NULL;
 			}
+			iter++;
 		}
 	}
 }
