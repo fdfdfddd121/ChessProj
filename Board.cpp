@@ -107,7 +107,7 @@ std::string Board::makeMove(std::string move)
 	}
 	if (_turn)
 	{
-		checked = ((King*)_WhiteKing)->isChecked(_WhiteKing->getPlace(), _pieces);
+		checked = (King::isChecked(_WhiteKing->getPlace(), *(King*)_WhiteKing, _pieces));
 		((King*)_WhiteKing)->setIsChecked(checked);
 		if (checked)
 		{
@@ -120,7 +120,7 @@ std::string Board::makeMove(std::string move)
 	}
 	else
 	{
-		checked = ((King*)_BlackKing)->isChecked(_BlackKing->getPlace(), _pieces);
+		checked = (King::isChecked(_BlackKing->getPlace(), *(King*)_BlackKing ,_pieces));
 		((King*)_BlackKing)->setIsChecked(checked);
 		if (checked)
 		{

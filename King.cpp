@@ -49,7 +49,7 @@ bool King::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])
 	}
 	else if ((destI == (srcI + 1) || destI == (srcI - 1) || (destI == srcI)) && (destJ == (srcJ + 1) || destJ == (srcJ - 1)) || (destJ == srcJ) && (destI == (srcI + 1) || destI == (srcI - 1)))
 	{
-		valid = !isChecked(dest, board);
+		valid = !isChecked(dest,*this,  board);
 	}
 	else
 	{
@@ -64,7 +64,7 @@ bool King::isValidMove(const Piece& other, Piece* board[][BOARD_SIZE])
 }
 
 
-bool King::isChecked(const std::string& source, Piece* board[][BOARD_SIZE])
+bool King::isChecked(const std::string& source, King& king, Piece* board[][BOARD_SIZE])
 {
 	bool answer = false;
 
@@ -75,7 +75,7 @@ bool King::isChecked(const std::string& source, Piece* board[][BOARD_SIZE])
 	{
 		for (int j = 0; j < BOARD_SIZE && !answer; j++)
 		{
-			if (board[i][j] != NULL && (board[i][j]->getIsWhite() != board[sourceI][sourceJ]->getIsWhite()) && (*board[i][j]).isValidMove(source, board))
+			if (board[i][j] != NULL && (board[i][j]->getIsWhite() != king.getIsWhite()) && (*board[i][j]).isValidMove(source, board))
 			{
 				answer = true;
 			}
