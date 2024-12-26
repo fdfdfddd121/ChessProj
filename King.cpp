@@ -75,7 +75,7 @@ bool King::isChecked(const std::string& source, King& king, Piece* board[][BOARD
 	{
 		for (int j = 0; j < BOARD_SIZE && !answer; j++)
 		{
-			if (board[i][j] != NULL && (board[i][j]->getIsWhite() != king.getIsWhite()) && (*board[i][j]).isValidMove(source, board))
+			if (board[i][j] != &king && board[i][j] != NULL && (board[i][j]->getIsWhite() != king.getIsWhite()) && (*board[i][j]).isValidMove(source, board))
 			{
 				answer = true;
 			}
