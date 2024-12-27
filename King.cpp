@@ -48,36 +48,11 @@ bool King::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])
         throw 7;
     }
 
-    if ((destI == (srcI + 1) || destI == (srcI - 1) || (destI == srcI)) &&
-        (destJ == (srcJ + 1) || destJ == (srcJ - 1)) || (destJ == srcJ) &&
-        (destI == (srcI + 1) || destI == (srcI - 1)))
+	if (((destI == (srcI + 1) || destI == (srcI - 1) || (destI == srcI)) &&
+		(destJ == (srcJ + 1) || destJ == (srcJ - 1)) || (destJ == srcJ) &&
+		(destI == (srcI + 1) || destI == (srcI - 1))))
     {
-        // Store original state
-        Piece* originalKingPos = board[srcI][srcJ];
-        Piece* originalDestPos = board[destI][destJ];
-
-        // Remove king and captured piece temporarily
-        board[srcI][srcJ] = NULL;
-        board[destI][destJ] = NULL;
-
-        // Check if destination square is attacked
-        valid = true;
-        for (int i = 0; i < BOARD_SIZE && valid; i++)
-        {
-            for (int j = 0; j < BOARD_SIZE && valid; j++)
-            {
-                if (board[i][j] != NULL &&
-                    board[i][j]->getIsWhite() != this->getIsWhite() &&
-                    board[i][j]->isValidMove(dest, board))
-                {
-                    valid = false;
-                }
-            }
-        }
-
-        // Restore original positions
-        board[srcI][srcJ] = originalKingPos;
-        board[destI][destJ] = originalDestPos;
+		valid = true;
     }
 
     return valid;
