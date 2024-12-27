@@ -13,32 +13,33 @@ Piece::~Piece()
 
 void Piece::setPlace(const std::string& place, Piece* board[][BOARD_SIZE])
 {
-	int intSource = placeToIndex(place);
-	int sourceI = intSource % 10, sourceJ = intSource / 10;
-	if (place.length()!=2 || (sourceI <0 || sourceI>8) || (sourceJ < 0 || sourceJ>8)) //invalid indeces(so basicaly the writing)
-	{
-		throw 5;
-	}
-	else if (_place == place) //dest is same location as src
-	{
-		throw 7;
-	}
-	if (!_place.empty())
-	{
-		int old_place = placeToIndex(_place);
-		int oldI = old_place / 10, oldJ = old_place % 10;
-		Piece* this_piece = board[oldI][oldJ];
-		_place = place;
-		int new_place = placeToIndex(_place);
-		int newI = new_place / 10, newJ = new_place % 10;
-		board[newI][newJ] = this_piece;
-		board[oldI][oldJ] = NULL;
-	}
-	else
-	{
-		_place = place;
-	}
+    int intSource = placeToIndex(place);
+    int sourceI = intSource / 10, sourceJ = intSource % 10;  // FIXED
 
+    if (place.length() != 2 || (sourceI < 0 || sourceI > 7) || (sourceJ < 0 || sourceJ > 7)) // also fixed bounds
+    {
+        throw 5;
+    }
+    else if (_place == place)
+    {
+        throw 7;
+    }
+
+    if (!_place.empty())
+    {
+        int old_place = placeToIndex(_place);
+        int oldI = old_place / 10, oldJ = old_place % 10;
+        Piece* this_piece = board[oldI][oldJ];
+        _place = place;
+        int new_place = placeToIndex(_place);
+        int newI = new_place / 10, newJ = new_place % 10;
+        board[newI][newJ] = this_piece;
+        board[oldI][oldJ] = NULL;
+    }
+    else
+    {
+        _place = place;
+    }
 }
 
 void Piece::setType(const char type)

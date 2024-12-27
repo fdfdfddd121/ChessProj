@@ -187,17 +187,15 @@ void Board::exceptionHandler(const std::string& source, const std::string& dest,
 		throw 3;
 	}
 
-	else if (((board[sourceI][sourceJ]->getIsWhite() && King::isChecked(_WhiteKing->getPlace(), *(King*)_WhiteKing, board) && board[sourceI][sourceJ]->getType() != 'K') || (!board[sourceI][sourceJ]->getIsWhite() && King::isChecked(_BlackKing->getPlace(), *(King*)_BlackKing, board) && board[sourceI][sourceJ]->getType() != 'k')))
+	else if (((board[sourceI][sourceJ]->getIsWhite() && King::isChecked(_WhiteKing->getPlace(), *(King*)_WhiteKing, board))
+		|| (!board[sourceI][sourceJ]->getIsWhite() && King::isChecked(_BlackKing->getPlace(), *(King*)_BlackKing, board)))
+		|| nextTurnCheck(source, dest, board))
 	{
-		board[sourceI][sourceJ]->move(dest, board);
-		if (((board[destI][destJ]->getIsWhite() && King::isChecked(_WhiteKing->getPlace(), *(King*)_WhiteKing, board) && board[destI][destJ]->getType() != 'K') || (!board[destI][destJ]->getIsWhite() && King::isChecked(_BlackKing->getPlace(), *(King*)_BlackKing, board) && board[destI][destJ]->getType() != 'k')))
-		{
-			board[destI][destJ]->move(source, board);
+		
+		bool stillInCheck = nextTurnCheck(source, dest, board);
+		if (!board[sourceI][sourceJ]->isValidMove(dest, board) || stillInCheck) {
 			throw 4;
 		}
-
-		board[destI][destJ]->move(source, board);
-		
 	}
 
 	else if (sourceI > BOARD_SIZE - 1 || sourceI < 0 || sourceJ > BOARD_SIZE - 1 || sourceJ < 0 || destI > BOARD_SIZE - 1 || destI < 0 || destJ > BOARD_SIZE - 1 || destJ < 0)
@@ -209,5 +207,39 @@ void Board::exceptionHandler(const std::string& source, const std::string& dest,
 	{
 		throw 6;
 	}
+}
+
+bool Board::nextTurnCheck(const std::string& source, const std::string& dest, Piece* board[][BOARD_SIZE])
+{
+	int intSource = Piece::placeToIndex(source), intDest = Piece::placeToIndex(dest);
+	int sourceI = intSource / 10, sourceJ = intSource % 10;
+	int destI = intDest / 10, destJ = intDest % 10;
+	// First check if it's an invalid move before testing check block
+	if (!board[sourceI][sourceJ]->isValidMove(dest, board))
+	{
+		throw 6;  // Invalid move
+	}
+
+	// Test if the move would block the check
+	Piece* capturedPiece = board[destI][destJ];
+	std::string origSource = board[sourceI][sourceJ]->getPlace();
+
+	// Make the test move
+	board[sourceI][sourceJ]->move(dest, board);
+
+	// Check if king is still in check
+	bool stillInCheck;
+	if (board[destI][destJ]->getIsWhite()) {
+		stillInCheck = King::isChecked(_WhiteKing->getPlace(), *(King*)_WhiteKing, board);
+	}
+	else {
+		stillInCheck = King::isChecked(_BlackKing->getPlace(), *(King*)_BlackKing, board);
+	}
+
+	// Restore board state
+	board[destI][destJ]->move(origSource, board);
+	board[destI][destJ] = capturedPiece;
+
+	return stillInCheck;
 }
 

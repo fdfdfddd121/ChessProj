@@ -34,81 +34,52 @@ void Rook::move(const std::string& dest, Piece* board[][BOARD_SIZE])
 
 bool Rook::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])
 {
-	bool valid = (dest[0]==_place[0]) || (dest[1]==_place[1]);
-	int destI = placeToIndex(dest) / 10, destJ = placeToIndex(dest) % 10;
-	int srcI = placeToIndex(_place) / 10, srcJ = placeToIndex(_place) % 10;
-	if (dest.compare(this->getPlace()) == 0)
-	{
-		throw 7;
-	}
-	if (valid)
-	{
-		int j = 0;
-		if (destI == srcI)
-		{
-			if (destJ > srcJ)
-			{
-				for (j = srcJ + 1; j < destJ && valid; j++)
-				{
-					if (board[srcI][j] != NULL)
-					{
-						valid = false;
-					}
-				}
-				if (board[destI][destJ] != NULL)
-				{
-					valid = !(getIsWhite() == board[destI][destJ]->getIsWhite());
-				}
-			}
-			else
-			{
-				for (j = srcJ - 1; destJ < j && valid; j--)
-				{
-					if (board[srcI][j] != NULL)
-					{
-						valid = false;
-					}
-				}
-				if (board[destI][destJ] != NULL)
-				{
-					valid = !(getIsWhite() == board[destI][destJ]->getIsWhite());
-				}
-			}
-		}
-		else if (destJ == srcJ)
-		{
-			int i = srcI;
-			if (destI > srcI)
-			{
-				for (i = srcI + 1; i < destI && valid; i++)
-				{
-					if (board[i][srcJ] != NULL)
-					{
-						valid = false;
-					}
-				}
-				if (board[destI][destJ] != NULL)
-				{
-					valid = !(getIsWhite() == board[destI][destJ]->getIsWhite());
-				}
-			}
-			else
-			{
-				for (i = srcI - 1; destI < i && valid; i--)
-				{
-					if (board[i][srcJ] != NULL)
-					{
-						valid = false;
-					}
-				}
-				if (board[destI][destJ] != NULL)
-				{
-					valid = !(getIsWhite() == board[destI][destJ]->getIsWhite());
-				}
-			}
-		}
-	}
-	return valid;
+    int destI = placeToIndex(dest) / 10, destJ = placeToIndex(dest) % 10;
+    int srcI = placeToIndex(_place) / 10, srcJ = placeToIndex(_place) % 10;
+
+    // Check if move is to same position
+    if (dest.compare(this->getPlace()) == 0)
+    {
+        throw 7;
+    }
+
+    // Check if move is along rank or file
+    if (destI != srcI && destJ != srcJ)
+    {
+        return false;
+    }
+
+    // Moving horizontally
+    if (srcI == destI) {
+        int start = std::min(srcJ, destJ) + 1;
+        int end = std::max(srcJ, destJ);
+
+        // Check path is clear
+        for (int j = start; j < end; j++) {
+            if (board[srcI][j] != NULL) {
+                return false;
+            }
+        }
+    }
+    // Moving vertically
+    else {
+        int start = std::min(srcI, destI) + 1;
+        int end = std::max(srcI, destI);
+
+        // Check path is clear
+        for (int i = start; i < end; i++) {
+            if (board[i][srcJ] != NULL) {
+                return false;
+            }
+        }
+    }
+
+    // Check destination square
+    if (board[destI][destJ] != NULL) {
+        return board[destI][destJ]->getIsWhite() != this->getIsWhite();
+    }
+
+    return true;
 }
 bool Rook::isValidMove(const Piece& other, Piece* board[][BOARD_SIZE])
 {
