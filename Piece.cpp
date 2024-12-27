@@ -78,9 +78,15 @@ bool Piece::gethasMoved() const
 	return _hasMoved;
 }
 
-void Piece::eat(Piece& other)
+void Piece::eat(Piece* other, Piece* board[][BOARD_SIZE])
 {
-	delete &other;
+	if(other != NULL)
+	{
+	int pos = placeToIndex((*other).getPlace());
+	int i = pos / 10, j = pos % 10;
+	board[i][j] = nullptr;
+	delete& other;
+	}
 }
 
 //turns an index [i, j] to a placement, ie. e4

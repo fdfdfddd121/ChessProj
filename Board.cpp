@@ -1,11 +1,12 @@
 #include "Board.h"
 #include "King.h"
 #include "Rook.h"
+#include "Knight.h"
 #include <iostream>
 
 //top left is [0][0] as it is wayyy easier to look at while running over the array
 //#define startingBoard "RNBKQBNRPPPPPPPP################################pppppppprnbkqbnr"
-#define startingBoard "R##K###R################################################r##k###r"
+#define startingBoard "RN#K##NR################################################rn#k##nr"
 
 Piece* Board::_WhiteKing = nullptr;
 Piece* Board::_BlackKing = nullptr;
@@ -28,14 +29,14 @@ Board::Board(const bool turn)
 	{
 		for (int j = 0; j < BOARD_SIZE; j++)
 		{
+			place = Piece::indexToPlace(i, j);
 			if (startingBoard[iter] == 'R' || startingBoard[iter] == 'r')
 			{
-				place = Piece::indexToPlace(i, j);
 				this->_pieces[i][j] = new Rook(place, startingBoard[iter], this->_pieces);
 			}
 			else if (startingBoard[iter] == 'N' || startingBoard[iter] == 'n')
 			{
-
+				this->_pieces[i][j] = new Knight(place, startingBoard[iter], this->_pieces);
 			}
 			else if (startingBoard[iter] == 'B' || startingBoard[iter] == 'b')
 			{
@@ -43,7 +44,6 @@ Board::Board(const bool turn)
 			}
 			else if (startingBoard[iter] == 'K' || startingBoard[iter] == 'k')
 			{
-				place = Piece::indexToPlace(i, j);
 				this->_pieces[i][j] = new King(place, startingBoard[iter], this->_pieces);
 				if (startingBoard[iter] == 'K')
 				{

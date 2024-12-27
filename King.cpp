@@ -27,7 +27,7 @@ void King::move(const std::string& dest, Piece* board[][BOARD_SIZE])
 
 	if (isValidMove(dest, board))
 	{
-		eat(*board[int(destIndex / 10)][destIndex % 10]);
+		eat(board[int(destIndex / 10)][destIndex % 10], board);
 	}
 	else
 	{

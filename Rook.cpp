@@ -21,7 +21,7 @@ void Rook::move(const std::string& dest, Piece* board[][BOARD_SIZE])
 	if (isValidMove(dest, board))
 	{
 		//in eat function if null we do nothing, implement in piece.cpp
-		eat(*board[int(destIndex/10)][destIndex%10]);
+		eat(board[int(destIndex/10)][destIndex%10], board);
 	}
 	else
 	{

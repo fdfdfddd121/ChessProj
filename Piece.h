@@ -21,7 +21,7 @@ public:
 	char getType() const;
 	bool gethasMoved() const;
 	//piece functions
-	void eat(Piece& other);
+	void eat(Piece* other, Piece* board[][BOARD_SIZE]);
 	//pure virtual per piece functions
 	virtual void move(const std::string& dest, Piece* board[][BOARD_SIZE]) = 0;
 	virtual bool isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE]) = 0;
