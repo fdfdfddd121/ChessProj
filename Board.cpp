@@ -11,11 +11,53 @@
 Piece* Board::_WhiteKing = nullptr;
 Piece* Board::_BlackKing = nullptr;
 
+void Board::makePiece(const std::string& place, const char type, Piece* board[][BOARD_SIZE])
+{
+	int i = Piece::placeToIndex(place) / 10, j = Piece::placeToIndex(place) % 10;
+	if (type == 'R' || type == 'r')
+	{
+		board[i][j] = new Rook(place, type, board);
+	}
+	else if (type == 'N' || type == 'n')
+	{
+		board[i][j] = new Knight(place, type, board);
+	}
+	else if (type == 'B' || type == 'b')
+	{
+
+	}
+	else if (type == 'K' || type == 'k')
+	{
+		board[i][j] = new King(place, type, board);
+		if (type == 'K')
+		{
+			_WhiteKing = (King*)board[i][j];
+		}
+		else if (type == 'k')
+		{
+			_BlackKing = (King*)board[i][j];
+		}
+	}
+	else if (type == 'Q' || type == 'q')
+	{
+
+	}
+	else if (type == 'P' || type == 'p')
+	{
+
+	}
+	else if (type == '#')
+	{
+		board[i][j] = NULL;
+	}
+}
+
 Board::Board(const bool turn)
 {
 	this->_BlackKing = NULL;
 	this->_WhiteKing = NULL;
 	std::string place = "";
+	char type = 0;
 	int iter = 0;
 	this->_turn = turn;
 	for (int i = 0; i < BOARD_SIZE; i++)
@@ -30,42 +72,8 @@ Board::Board(const bool turn)
 		for (int j = 0; j < BOARD_SIZE; j++)
 		{
 			place = Piece::indexToPlace(i, j);
-			if (startingBoard[iter] == 'R' || startingBoard[iter] == 'r')
-			{
-				this->_pieces[i][j] = new Rook(place, startingBoard[iter], this->_pieces);
-			}
-			else if (startingBoard[iter] == 'N' || startingBoard[iter] == 'n')
-			{
-				this->_pieces[i][j] = new Knight(place, startingBoard[iter], this->_pieces);
-			}
-			else if (startingBoard[iter] == 'B' || startingBoard[iter] == 'b')
-			{
-
-			}
-			else if (startingBoard[iter] == 'K' || startingBoard[iter] == 'k')
-			{
-				this->_pieces[i][j] = new King(place, startingBoard[iter], this->_pieces);
-				if (startingBoard[iter] == 'K')
-				{
-					_WhiteKing =(King*) this->_pieces[i][j];
-				}
-				else if (startingBoard[iter] == 'k')
-				{
-					_BlackKing =(King*) this->_pieces[i][j];
-				}
-			}
-			else if (startingBoard[iter] == 'Q' || startingBoard[iter] == 'q')
-			{
-
-			}
-			else if (startingBoard[iter] == 'P' || startingBoard[iter] == 'p')
-			{
-
-			}
-			else if (startingBoard[iter] == '#')
-			{
-				this->_pieces[i][j] = NULL;
-			}
+			type = startingBoard[iter];
+			makePiece(place, type, _pieces);
 			iter++;
 		}
 	}
@@ -214,6 +222,11 @@ bool Board::nextTurnCheck(const std::string& source, const std::string& dest, Pi
 	int intSource = Piece::placeToIndex(source), intDest = Piece::placeToIndex(dest);
 	int sourceI = intSource / 10, sourceJ = intSource % 10;
 	int destI = intDest / 10, destJ = intDest % 10;
+	char type = 0;
+	if (board[destI][destJ] != NULL)
+	{
+		type = board[destI][destJ]->getType();
+	}
 	// First check if it's an invalid move before testing check block
 	if (!board[sourceI][sourceJ]->isValidMove(dest, board))
 	{
@@ -221,7 +234,6 @@ bool Board::nextTurnCheck(const std::string& source, const std::string& dest, Pi
 	}
 
 	// Test if the move would block the check
-	Piece* capturedPiece = board[destI][destJ];
 	std::string origSource = board[sourceI][sourceJ]->getPlace();
 
 	// Make the test move
@@ -238,8 +250,10 @@ bool Board::nextTurnCheck(const std::string& source, const std::string& dest, Pi
 
 	// Restore board state
 	board[destI][destJ]->move(origSource, board);
-	board[destI][destJ] = capturedPiece;
-
+	if (type != 0)
+	{
+		makePiece(dest, type, board);
+	}
 	return stillInCheck;
 }
 

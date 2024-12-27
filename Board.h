@@ -8,6 +8,7 @@ protected:
 	bool _turn;
 	static Piece* _WhiteKing;
 	static Piece* _BlackKing;
+	static void makePiece(const std::string& place, const char type, Piece* board[][BOARD_SIZE]);
 public:
 	//basic class functions
 	Board(const bool turn = 0);

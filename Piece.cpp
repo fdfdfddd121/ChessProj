@@ -84,8 +84,8 @@ void Piece::eat(Piece* other, Piece* board[][BOARD_SIZE])
 	{
 	int pos = placeToIndex((*other).getPlace());
 	int i = pos / 10, j = pos % 10;
+	delete other;
 	board[i][j] = nullptr;
-	delete& other;
 	}
 }
 
