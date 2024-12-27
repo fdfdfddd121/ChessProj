@@ -2,11 +2,12 @@
 #include "King.h"
 #include "Rook.h"
 #include "Knight.h"
+#include "Bishop.h"
 #include <iostream>
 
 //top left is [0][0] as it is wayyy easier to look at while running over the array
 //#define startingBoard "RNBKQBNRPPPPPPPP################################pppppppprnbkqbnr"
-#define startingBoard "RN#K##NR################################################rn#k##nr"
+#define startingBoard "RNBK#BNR################################################rnbk#bnr"
 
 Piece* Board::_WhiteKing = nullptr;
 Piece* Board::_BlackKing = nullptr;
@@ -24,7 +25,7 @@ void Board::makePiece(const std::string& place, const char type, Piece* board[][
 	}
 	else if (type == 'B' || type == 'b')
 	{
-
+		board[i][j] = new Bishop(place, type, board);
 	}
 	else if (type == 'K' || type == 'k')
 	{

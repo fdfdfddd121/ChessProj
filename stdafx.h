@@ -14,6 +14,8 @@
 #include "Piece.h"
 #include "Rook.h"
 #include "Board.h"
+#include "Knight.h"
+#include "Bishop.h"
 #include "King.h"
 
 

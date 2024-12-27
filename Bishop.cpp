@@ -49,8 +49,35 @@ bool Bishop::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])
         return false;
     }
 
-
-
+    // Moving horizontally
+    if (srcI > destI && srcJ > destJ) {
+        for (int i = srcI; i < destI; i++) {
+            if (board[srcI - i][srcJ - i] != NULL) {
+                return false;
+            }
+        }
+    }
+    else if (srcI > destI && srcJ < destJ) {
+        for (int i = srcI; i < destI; i++) {
+            if (board[srcI - i][srcJ + i] != NULL) {
+                return false;
+            }
+        }
+    }
+    else if (srcI <  destI && srcJ > destJ) {
+        for (int i = srcI; i < destI; i++) {
+            if (board[srcI + i][srcJ - i] != NULL) {
+                return false;
+            }
+        }
+    }
+    else if (srcI < destI && srcJ < destJ) {
+        for (int i = srcI; i < destI; i++) {
+            if (board[srcI - i][srcJ - i] != NULL) {
+                return false;
+            }
+        }
+    }
 
     // Check destination square
     if (board[destI][destJ] != NULL) {
