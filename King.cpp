@@ -32,7 +32,7 @@ void King::move(const std::string& dest, Piece* board[][BOARD_SIZE])
 	else
 	{
 		//throw the fucking exception
-		Board::exceptionHandler(this->getPlace(), dest, board);
+		throw 6;
 	}
 	setPlace(dest, board);
 }

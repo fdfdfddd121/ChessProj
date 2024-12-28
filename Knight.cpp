@@ -19,7 +19,7 @@ void Knight::move(const std::string& dest, Piece* board[][BOARD_SIZE])
 	}
 	else
 	{
-		Board::exceptionHandler(getPlace(), dest, board);
+		throw 6;
 	}
 	setPlace(dest, board);
 }

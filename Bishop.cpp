@@ -25,8 +25,7 @@ void Bishop::move(const std::string& dest, Piece* board[][BOARD_SIZE])
     }
     else
     {
-        //throw the fucking exception
-        Board::exceptionHandler(this->getPlace(), dest, board);
+        throw 6;
     }
     setPlace(dest, board);
 
@@ -50,32 +49,24 @@ bool Bishop::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])
     }
 
     // Moving horizontally
-    if (srcI > destI && srcJ > destJ) {
-        for (int i = srcI; i < destI; i++) {
-            if (board[srcI - i][srcJ - i] != NULL) {
-                return false;
-            }
+    for (int i = 1; srcI-i > destI && srcJ-i > destJ; i++) {
+        if (board[srcI - i][srcJ - i] != NULL) {
+            return false;
         }
     }
-    else if (srcI > destI && srcJ < destJ) {
-        for (int i = srcI; i < destI; i++) {
-            if (board[srcI - i][srcJ + i] != NULL) {
-                return false;
-            }
+    for (int i = 1; srcI-i > destI && srcJ+i < destJ; i++) {
+        if (board[srcI - i][srcJ + i] != NULL) {
+            return false;
         }
     }
-    else if (srcI <  destI && srcJ > destJ) {
-        for (int i = srcI; i < destI; i++) {
-            if (board[srcI + i][srcJ - i] != NULL) {
-                return false;
-            }
+    for (int i = 1; srcI+i <  destI && srcJ-i > destJ; i++) {
+        if (board[srcI + i][srcJ - i] != NULL) {
+            return false;
         }
     }
-    else if (srcI < destI && srcJ < destJ) {
-        for (int i = srcI; i < destI; i++) {
-            if (board[srcI - i][srcJ - i] != NULL) {
-                return false;
-            }
+    for (int i = 1; srcI+i < destI && srcJ+i < destJ; i++) {
+        if (board[srcI + i][srcJ + i] != NULL) {
+            return false;
         }
     }
 

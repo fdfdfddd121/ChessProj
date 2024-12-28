@@ -102,13 +102,17 @@ std::string Board::makeMove(std::string move)
 	bool checked;
 	try
 	{
-		int src_idx = Piece::placeToIndex(src);
-		int sourceI = src_idx / 10, sourceJ = src_idx % 10;
-		Board::exceptionHandler(src,dest,_pieces);
-		if (_pieces[sourceI][sourceJ]->getIsWhite() != !_turn)
+		int src_idx = Piece::placeToIndex(src), dest_idx = Piece::placeToIndex(dest);
+		int sourceI = src_idx / 10, sourceJ = src_idx % 10,destI = dest_idx/10, destJ = dest_idx%10;
+		if (sourceI > BOARD_SIZE - 1 || sourceI < 0 || sourceJ > BOARD_SIZE - 1 || sourceJ < 0 || destI > BOARD_SIZE - 1 || destI < 0 || destJ > BOARD_SIZE - 1 || destJ < 0)
+		{
+				throw 5;
+		}
+		else if (_pieces[sourceI][sourceJ]!=NULL && _pieces[sourceI][sourceJ]->getIsWhite() != !_turn)
 		{
 			throw 2; //not yo turn!
 		}
+		Board::exceptionHandler(src,dest,_pieces);
 		_pieces[sourceI][sourceJ]->move(dest, _pieces);
 		printBoard();
 	}
@@ -239,6 +243,7 @@ bool Board::nextTurnCheck(const std::string& source, const std::string& dest, Pi
 
 	// Make the test move
 	board[sourceI][sourceJ]->move(dest, board);
+	printBoard();
 
 	// Check if king is still in check
 	bool stillInCheck;
@@ -251,6 +256,7 @@ bool Board::nextTurnCheck(const std::string& source, const std::string& dest, Pi
 
 	// Restore board state
 	board[destI][destJ]->move(origSource, board);
+	printBoard();
 	if (type != 0)
 	{
 		makePiece(dest, type, board);
