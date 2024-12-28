@@ -304,7 +304,16 @@ bool Board::nextTurnCheck(const std::string& source, const std::string& dest, Pi
 	}
 
 	// Restore board state
-	board[destI][destJ]->move(origSource, board);
+	if (toupper(board[destI][destJ]->getType()) != 'P')
+	{
+		board[destI][destJ]->move(origSource, board);
+	}
+	else
+	{
+		char srcType = board[destI][destJ]->getType();
+		delete board[destI][destJ];
+		makePiece(source, srcType, board);
+	}
 	printBoard();
 	if (type != 0)
 	{
