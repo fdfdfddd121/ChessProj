@@ -66,7 +66,7 @@ bool Pawn::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])
     }
     if ((srcI + 1 == destI) && abs(srcJ - destJ) == 1)
     {
-        if (board[srcJ][destJ] != NULL && board[srcJ][destJ]->getIsWhite() != this->getIsWhite())
+        if (board[destI][destJ] != NULL && board[destI][destJ]->getIsWhite() != this->getIsWhite())
         {
             valid = true;
         }
