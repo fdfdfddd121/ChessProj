@@ -1,6 +1,11 @@
 #include "Rook.h"
 #include "Board.h"
-
+/// <summary>
+/// constructor for Rook
+/// </summary>
+/// <param name="place: "> where the piece will be</param>
+/// <param name="type:"> what is the type of the piece. will always be R or r for this piece</param>
+/// <param name="board:"> the board on which to create the rook</param>
 Rook::Rook(const std::string& place, const char type, Piece* board[][BOARD_SIZE]):
 	Piece(place, type, board)
 {
@@ -8,11 +13,17 @@ Rook::Rook(const std::string& place, const char type, Piece* board[][BOARD_SIZE]
 	this->_type = type;
 	this->_place = place;
 }
-
+/// <summary>
+/// destructor for Rook
+/// </summary>
 Rook::~Rook()
 {
 }
-
+/// <summary>
+/// attempt to move the rook
+/// </summary>
+/// <param name="dest:"> location to move the rook to</param>
+/// <param name="board:"> the board on which to move the rook</param>
 void Rook::move(const std::string& dest, Piece* board[][BOARD_SIZE])
 {
 	std::string pastPlace = this->getPlace();
@@ -20,7 +31,7 @@ void Rook::move(const std::string& dest, Piece* board[][BOARD_SIZE])
 
 	if (isValidMove(dest, board))
 	{
-		//in eat function if null we do nothing, implement in piece.cpp
+		//in eat function if null we do nothing
 		eat(board[int(destIndex/10)][destIndex%10], board);
 	}
 	else
@@ -31,7 +42,12 @@ void Rook::move(const std::string& dest, Piece* board[][BOARD_SIZE])
 	setPlace(dest, board);
 
 }
-
+/// <summary>
+/// checks if the attempted movement is valid for the rook
+/// </summary>
+/// <param name="dest:"> the place we want to move the rook to</param>
+/// <param name="board:"> the board on which we check the validity of the movement</param>
+/// <returns> is the move valid or not</returns>
 bool Rook::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])
 {
     int destI = placeToIndex(dest) / 10, destJ = placeToIndex(dest) % 10;
@@ -81,6 +97,12 @@ bool Rook::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])
 
     return true;
 }
+/// <summary>
+/// checks if the attempted movement is valid for the rook
+/// </summary>
+/// <param name="other:"> the piece to which we want to move the rook</param>
+/// <param name="board:"> the board on which we want to validate the rook's movement</param>
+/// <returns>is the move valid</returns>
 bool Rook::isValidMove(const Piece& other, Piece* board[][BOARD_SIZE])
 {
 	return isValidMove(other.getPlace(), board);
