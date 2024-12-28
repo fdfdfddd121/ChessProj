@@ -312,6 +312,7 @@ bool Board::nextTurnCheck(const std::string& source, const std::string& dest, Pi
 	{
 		char srcType = board[destI][destJ]->getType();
 		delete board[destI][destJ];
+		board[destI][destJ] = NULL;
 		makePiece(source, srcType, board);
 	}
 	printBoard();
