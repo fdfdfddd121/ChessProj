@@ -8,8 +8,7 @@
 #include <iostream>
 
 //top left is [0][0] as it is wayyy easier to look at while running over the array
-//#define startingBoard "RNBKQBNRPPPPPPPP################################pppppppprnbkqbnr"
-#define startingBoard "RNBQKBNRP##############################################prnbqkbnr"
+#define startingBoard "RNBKQBNRPPPPPPPP################################pppppppprnbkqbnr"
 
 Piece* Board::_WhiteKing = nullptr; //pointer to white king
 Piece* Board::_BlackKing = nullptr; //pointer to black king
