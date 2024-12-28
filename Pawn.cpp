@@ -58,40 +58,21 @@ bool Pawn::isValidMove(const std::string& dest, Piece* board[][BOARD_SIZE])
         throw 7;
     }
 
-    // Check if move is along rank or file
-    if (abs(srcJ - destJ) != abs(srcI - destI))
+    bool valid = true;
+
+    if (srcJ != destJ || (srcI + 1 != destI || srcI + 1 + int(this->gethasMoved()) != destI))
     {
-        return false;
+        valid = false;
     }
-
-    // Moving horizontally
-    for (int i = 1; srcI - i > destI && srcJ - i > destJ; i++) {
-        if (board[srcI - i][srcJ - i] != NULL) {
-            return false;
-        }
-    }
-    for (int i = 1; srcI - i > destI && srcJ + i < destJ; i++) {
-        if (board[srcI - i][srcJ + i] != NULL) {
-            return false;
-        }
-    }
-    for (int i = 1; srcI + i < destI && srcJ - i > destJ; i++) {
-        if (board[srcI + i][srcJ - i] != NULL) {
-            return false;
-        }
-    }
-    for (int i = 1; srcI + i < destI && srcJ + i < destJ; i++) {
-        if (board[srcI + i][srcJ + i] != NULL) {
-            return false;
+    if ((srcI + 1 == destI) && abs(srcJ - destJ) == 1)
+    {
+        if (board[srcJ][destJ] != NULL && board[srcJ][destJ]->getIsWhite() != this->getIsWhite())
+        {
+            valid = true;
         }
     }
 
-    // Check destination square
-    if (board[destI][destJ] != NULL) {
-        return board[destI][destJ]->getIsWhite() != this->getIsWhite();
-    }
-
-    return true;
+    return valid;
 }
 /// <summary>
 /// checks if the attempted movement is valid for the bishop

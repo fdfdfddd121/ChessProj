@@ -4,11 +4,12 @@
 #include "Knight.h"
 #include "Queen.h"
 #include "Bishop.h"
+#include "Pawn.h"
 #include <iostream>
 
 //top left is [0][0] as it is wayyy easier to look at while running over the array
 //#define startingBoard "RNBKQBNRPPPPPPPP################################pppppppprnbkqbnr"
-#define startingBoard "RNBKQBNR################################################rnbkqbnr"
+#define startingBoard "RNBQKBNRP##############################################prnbqkbnr"
 
 Piece* Board::_WhiteKing = nullptr; //pointer to white king
 Piece* Board::_BlackKing = nullptr; //pointer to black king
@@ -52,7 +53,7 @@ void Board::makePiece(const std::string& place, const char type, Piece* board[][
 	}
 	else if (type == 'P' || type == 'p')
 	{
-
+		board[i][j] = new Pawn(place, type, board);
 	}
 	else if (type == '#')
 	{
