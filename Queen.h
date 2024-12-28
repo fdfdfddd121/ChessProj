@@ -1,10 +1,12 @@
 #pragma once
 #include "Piece.h"
-class Bishop : virtual public Piece {
+#include "Bishop.h"
+#include "Rook.h"
+class Queen : public Rook, public Bishop {
 public:
 	//basic class functions
-	Bishop(const std::string& place, const char type, Piece* board[][BOARD_SIZE]);
-	virtual ~Bishop();
+	Queen(const std::string& place, const char type, Piece* board[][BOARD_SIZE]);
+	virtual ~Queen();
 
 	//implement Piece functions
 	virtual void move(const std::string& dest, Piece* board[][BOARD_SIZE]) override;

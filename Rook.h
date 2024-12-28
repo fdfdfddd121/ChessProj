@@ -1,6 +1,6 @@
 #pragma once
 #include "Piece.h"
-class Rook : public Piece {
+class Rook : virtual public Piece {
 public:
 	//basic class functions
 	Rook(const std::string& place, const char type, Piece* board[][BOARD_SIZE]);
