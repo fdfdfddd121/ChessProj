@@ -140,6 +140,7 @@ std::string Board::makeMove(std::string move)
 
 		Board::exceptionHandler(src,dest,_pieces); //check for any other bad movements
 		_pieces[sourceI][sourceJ]->move(dest, _pieces); //move the piece if there are no problems
+		_pieces[sourceI][sourceJ]->setHasMoved(true);
 		//for debugging
 		printBoard();
 	}
